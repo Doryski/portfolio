@@ -32,9 +32,17 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
 			setContent(content)
 		}
 		if (isLanguageIndicator(router.asPath)) {
-			getContent(getDomain() + '/api' + router.asPath)
+			getContent(
+				(typeof window !== 'undefined' && window.location.origin) +
+					'/api' +
+					router.asPath
+			)
 		} else {
-			getContent(getDomain() + '/api/' + language)
+			getContent(
+				(typeof window !== 'undefined' && window.location.origin) +
+					'/api/' +
+					language
+			)
 		}
 	}, [router.asPath])
 
