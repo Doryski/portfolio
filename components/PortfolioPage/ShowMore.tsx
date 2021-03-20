@@ -1,8 +1,8 @@
-import devlog from '@/debug/devlog'
 import React, { useContext, useEffect, useState } from 'react'
 import { MdExpandMore } from 'react-icons/md'
 import styled from 'styled-components'
-import { GlobalContext } from '../../context'
+import { GlobalContext } from 'context'
+
 import getWindowWidth from '../../helpers/getWindowWidth'
 import ClientOnly from '../shared/ClientOnly'
 
@@ -18,14 +18,12 @@ const ShowMore = ({ handleClick }: ShowMoreProps) => {
 	useEffect(() => {
 		setWindowWidth(getWindowWidth())
 	}, [])
-
-	devlog(windowWidth)
 	return (
 		<HorizontalLine>
 			<ClientOnly>
 				<ShowMoreBtn
 					windowWidth={windowWidth}
-					title={content.portfolio.showMore}
+					title={content?.portfolio?.showMore}
 					onClick={handleClick}>
 					<ExpandMoreIcon />
 					<ExpandMoreIcon />
