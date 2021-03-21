@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { MdExpandMore } from 'react-icons/md'
 import styled from 'styled-components'
 import { GlobalContext } from 'context'
-
-import getWindowWidth from '../../helpers/getWindowWidth'
 import ClientOnly from '../shared/ClientOnly'
 
 type ShowMoreProps = {
@@ -12,19 +10,10 @@ type ShowMoreProps = {
 
 const ShowMore = ({ handleClick }: ShowMoreProps) => {
 	const { content } = useContext(GlobalContext)
-	const [windowWidth, setWindowWidth] = useState<number | false>(() =>
-		getWindowWidth()
-	)
-	useEffect(() => {
-		setWindowWidth(getWindowWidth())
-	}, [])
 	return (
 		<HorizontalLine>
 			<ClientOnly>
-				<ShowMoreBtn
-					windowWidth={windowWidth}
-					title={content?.portfolio?.showMore}
-					onClick={handleClick}>
+				<ShowMoreBtn title={content?.portfolio?.showMore} onClick={handleClick}>
 					<ExpandMoreIcon />
 					<ExpandMoreIcon />
 				</ShowMoreBtn>
@@ -34,7 +23,8 @@ const ShowMore = ({ handleClick }: ShowMoreProps) => {
 }
 
 export const HorizontalLine = styled.div`
-	height: 0;
+	display: flex;
+	align-items: center;
 	width: 90%;
 	margin: 70px auto 0;
 	height: 2px;
@@ -45,12 +35,11 @@ export const HorizontalLine = styled.div`
 		${({ theme }) => theme.colors.primary} 50%,
 		${({ theme }) => theme.colors.secondary} 120%
 	);
-	position: relative;
 	@media only screen and (min-width: 400px) {
 		width: 80%;
 	}
 `
-export const ShowMoreBtn = styled.button<{ windowWidth: number | false }>`
+export const ShowMoreBtn = styled.button`
 	display: flex;
 	flex-direction: column;
 	background: none;
@@ -61,11 +50,6 @@ export const ShowMoreBtn = styled.button<{ windowWidth: number | false }>`
 	width: 53px;
 	align-items: center;
 	border: 2px solid #f4b266;
-	position: absolute;
-	top: -25px;
-	left: ${({ windowWidth }) =>
-		((4 / 5) * (windowWidth || 0)) / 2 - 53 - 26.5}px;
-	cursor: pointer;
 `
 export const ExpandMoreIcon = styled(MdExpandMore)`
 	width: 2.5rem;
