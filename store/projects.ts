@@ -57,7 +57,7 @@ export default [
 			name: 'Latające boidy z użyciem p5.js',
 		},
 		tools: 'JavaScript, p5.js',
-		imgSrc: '/images/flying_boids.png',
+		imgSrc: '/images/flying_boids.gif',
 		demoUrl: 'https://doryski.github.io/Flying_boids/',
 		codeUrl: 'https://github.com/Doryski/Flying_boids',
 		colors: {
