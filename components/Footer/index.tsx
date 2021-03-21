@@ -27,11 +27,11 @@ export const GitHubLinks = styled.a`
 	padding-left: 0.05em;
 	padding-right: 0.25em;
 	align-items: center;
-	background-color: ${({ theme }) => theme.colors.primary};
+	background-color: transparent;
 	transition: background-color 0.3s;
 	border-radius: 2px;
 	&:hover {
-		background-color: transparent;
+		background-color: ${({ theme }) => theme.colors.primary};
 	}
 `
 export const Wrapper = styled.footer`
