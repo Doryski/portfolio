@@ -19,7 +19,7 @@ const LangSwitch = () => {
 						active={language === lang.toLowerCase()}>
 						{lang}
 					</LangButton>
-					{index === 0 && <>&nbsp;/&nbsp;</>}
+					{index === 0 && <span style={{ margin: 'auto' }}>&nbsp;/&nbsp;</span>}
 				</>
 			))}
 		</StyledWrapper>
