@@ -37,5 +37,7 @@ export const LangButton = styled.button<{ active: boolean }>`
 	font-weight: bold;
 	background: transparent;
 	border: none;
+	font-size: ${({ active }) => (active ? '.9rem' : '.875rem')};
+	transition: all 0.4s ease;
 `
 export default LangSwitch
