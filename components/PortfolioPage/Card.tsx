@@ -53,6 +53,9 @@ export const ItemWrapper = styled.article`
 	background: white;
 	margin-top: 70px;
 	max-height: 353px;
+	box-shadow: 0 36px 30px -15px rgb(0 0 0 / 10%);
+	transition: all 0.4s ease;
+
 	&:first-of-type {
 		margin-top: 0;
 	}
@@ -83,6 +86,12 @@ export const ItemWrapper = styled.article`
 	@media only screen and (max-width: 400px) {
 		width: 90%;
 	}
+	@media only screen and (min-width: 900px) {
+		&:hover {
+			box-shadow: 0 20px 60px 0 rgb(0 0 0 / 40%);
+			transform: translate(0, -10px);
+		}
+	}
 `
 export const Column = styled.div`
 	display: flex;
@@ -95,9 +104,11 @@ export const Column = styled.div`
 	}
 `
 export const Row = styled(Column)`
-	height: 50%;
-	width: 100%;
-	justify-content: space-evenly;
+	@media only screen and (max-width: 900px) {
+		height: 50%;
+		width: 100%;
+		justify-content: space-evenly;
+	}
 `
 
 export const CardDescriptionWrapper = styled.div`
