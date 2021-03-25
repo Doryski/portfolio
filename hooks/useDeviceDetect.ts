@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import getWindowWidth from '../helpers/getWindowWidth'
 
+/**
+ *
+ * @param mobileBreakpoint defaults to 760
+ * @param desktopBreakpoint defaults to 900
+ */
 export default function useDeviceDetect(
 	mobileBreakpoint: number = 760,
 	desktopBreakpoint: number = 900
