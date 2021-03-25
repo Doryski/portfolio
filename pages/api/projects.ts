@@ -1,8 +1,8 @@
+import validateApiMethod from '@/helpers/validateApiMethod'
 import { NextApiRequest, NextApiResponse } from 'next'
 import projects from 'store/projects'
-import { validateApiMethod } from './en'
 
-export default async function ApiOffers(
+export default async function getProjects(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {

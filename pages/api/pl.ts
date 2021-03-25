@@ -1,6 +1,6 @@
+import validateApiMethod from '@/helpers/validateApiMethod'
 import { NextApiRequest, NextApiResponse } from 'next'
 import translationPL from '../../translations/pl'
-import { validateApiMethod } from './en'
 
 export default async function ApiOffers(
 	req: NextApiRequest,
