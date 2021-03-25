@@ -1,57 +1,34 @@
-import React, { useState, createContext, useEffect } from 'react'
+import React, { createContext } from 'react'
 import { ContextType } from '../types'
-import { useRouter } from 'next/dist/client/router'
-import getDomain from '@/helpers/getDomain'
-import isLanguageIndicator from '@/helpers/isLanguageIndicator'
-
-const languageInit =
-	typeof window !== 'undefined' && window.navigator.language === 'pl'
-		? 'pl'
-		: 'en'
+import { contentInit, languageInit } from '@/helpers/utils'
+import useLanguage from '@/hooks/useLanguage'
 
 const initialContext = {
 	language: languageInit,
-	content: {},
+	content: contentInit,
+	setLanguage: () => {},
+	projects: [],
 }
-// @ts-ignore
+
 export const GlobalContext = createContext<ContextType>(initialContext)
 
-const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
-	const [language, setLanguage] = useState(languageInit)
-	const [content, setContent] = useState({})
-	const router = useRouter()
-
-	useEffect(() => {
-		async function getContent(url: string) {
-			const res = await fetch(url)
-			const {
-				content,
-				language: lang,
-			}: { language: string; content: any } = await res.json()
-			setLanguage(lang.toLowerCase())
-			setContent(content)
-		}
-		if (isLanguageIndicator(router.asPath)) {
-			getContent(
-				(typeof window !== 'undefined' && window.location.origin) +
-					'/api' +
-					router.asPath
-			)
-		} else {
-			getContent(
-				(typeof window !== 'undefined' && window.location.origin) +
-					'/api/' +
-					language
-			)
-		}
-	}, [router.asPath])
+const GlobalContextProvider = ({
+	children,
+	data,
+}: {
+	children: React.ReactNode
+	data: any
+}) => {
+	const { pl, en, projects } = data
+	const { language, setLanguage, content } = useLanguage({ en, pl })
 
 	return (
 		<GlobalContext.Provider
 			value={{
 				language,
-				// @ts-ignore
+				setLanguage,
 				content,
+				projects,
 			}}>
 			{children}
 		</GlobalContext.Provider>

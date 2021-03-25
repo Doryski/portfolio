@@ -1,12 +1,9 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from 'context'
-
 import styled from 'styled-components'
-import { useRouter } from 'next/dist/client/router'
 
 const LangSwitch = () => {
-	const { language } = useContext(GlobalContext)
-	const router = useRouter()
+	const { language, setLanguage } = useContext(GlobalContext)
 	return (
 		<StyledWrapper>
 			{['EN', 'PL'].map((lang, index) => (
@@ -14,7 +11,7 @@ const LangSwitch = () => {
 					<LangButton
 						key={lang}
 						onClick={() => {
-							router.push('/', '/' + lang.toLowerCase())
+							setLanguage(lang.toLowerCase())
 						}}
 						active={language === lang.toLowerCase()}>
 						{lang}
