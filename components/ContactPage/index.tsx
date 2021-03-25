@@ -9,7 +9,6 @@ import Name from './Name'
 import { Form, SubmitMessage } from './FormComponents'
 import postMessage from '../../helpers/postMessage'
 import PageWrapper from '../shared/PageWrapper'
-import { FORMSPREE_LINK } from '../../helpers/utils'
 import useDialogHandler from '../../hooks/useDialogHandler'
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
 import SubmitFormModal from './SubmitFormModal'
@@ -34,7 +33,7 @@ const ContactPage = () => {
 	const onSubmit = handleSubmit(async (data) => {
 		dispatch({ type: 'LOADING', payload: true })
 		await postMessage(
-			FORMSPREE_LINK,
+			process.env.FORMSPREE_LINK!,
 			data,
 			() =>
 				openModal(open, () => {
