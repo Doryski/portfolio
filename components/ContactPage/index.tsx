@@ -33,7 +33,7 @@ const ContactPage = () => {
 	const onSubmit = handleSubmit(async (data) => {
 		dispatch({ type: 'LOADING', payload: true })
 		await postMessage(
-			process.env.FORMSPREE_LINK!,
+			'https://formspree.io/xvorpadg',
 			data,
 			() =>
 				openModal(open, () => {
