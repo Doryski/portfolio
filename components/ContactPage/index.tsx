@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useReducer, useRef, useState } from 'react'
 import { GlobalContext } from 'context'
 import SectionName from '../shared/SectionName'
 import { useForm } from 'react-hook-form'
@@ -21,44 +21,68 @@ export const openModal = (openFn: () => void, messageFn: () => void) => {
 	messageFn()
 }
 
+type SubmitType = { loading: boolean; success: boolean; failure: boolean }
+type SubmitActionType = {
+	type: 'LOADING' | 'SUCCESS' | 'FAILURE'
+	payload: boolean
+}
+
+const initialSubmit: SubmitType = {
+	loading: false,
+	success: false,
+	failure: false,
+}
+
+const reducer = (state: typeof initialSubmit, action: SubmitActionType) => {
+	switch (action.type) {
+		case 'LOADING':
+			return { ...state, loading: action.payload }
+		case 'SUCCESS':
+			return { ...state, success: action.payload }
+		case 'FAILURE':
+			return { ...state, failure: action.payload }
+		default:
+			throw new Error('Unknown submit action')
+	}
+}
+
 const ContactPage = () => {
 	const { content } = useContext(GlobalContext)
 	const { isMobile } = useDeviceDetect()
 	const { register, handleSubmit, errors, reset } = useForm()
-	const [success, setSuccess] = useState(false)
-	const [failure, setFailure] = useState(false)
+	const [submit, dispatch] = useReducer(reducer, initialSubmit)
 	const { isDialogOpen: isModalOpen, open, close } = useDialogHandler(false)
-	const [loading, setLoading] = useState(false)
 	const dialogRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(dialogRef, close)
+
 	const onSubmit = handleSubmit(async (data) => {
-		setLoading(true)
+		dispatch({ type: 'LOADING', payload: true })
 		await postMessage(
 			FORMSPREE_LINK,
 			data,
 			() =>
 				openModal(open, () => {
-					setSuccess(true)
+					dispatch({ type: 'SUCCESS', payload: true })
 					reset()
 				}),
-			() => openModal(open, () => setFailure(true))
+			() => openModal(open, () => dispatch({ type: 'FAILURE', payload: true }))
 		)
-		setLoading(false)
+		dispatch({ type: 'LOADING', payload: false })
 	})
-	const formElementProps = { errors, register }
 
-	const name = <Name {...formElementProps} />
-	const email = <Email {...formElementProps} />
-	const message = <Message {...formElementProps} />
+	const inputProps = { errors, register }
+	const name = <Name {...inputProps} />
+	const email = <Email {...inputProps} />
+	const message = <Message {...inputProps} />
 	const submitForm = (
-		<SubmitForm loading={loading}>
+		<SubmitForm loading={submit.loading}>
 			<SubmitFormModal isModalOpen={isModalOpen}>
 				<ModalBlur>
 					<ModalContent ref={dialogRef}>
 						<ModalClose onClick={close} />
 						<SubmitMessage>
-							{success && content?.contact?.success}
-							{failure && content?.contact?.failure}
+							{submit.success && content?.contact?.success}
+							{submit.failure && content?.contact?.failure}
 						</SubmitMessage>
 					</ModalContent>
 				</ModalBlur>
