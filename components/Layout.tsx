@@ -1,11 +1,10 @@
-import React from 'react'
-import HomePage from './HomePage'
-import Header from './Header'
+import HomePage from '@/components/HomePage'
+import Header from '@/components/Header'
 import styled from 'styled-components'
-import PortfolioPage from './PortfolioPage'
+import PortfolioPage from '@/components/PortfolioPage'
 import dynamic from 'next/dynamic'
-const ContactPage = dynamic(() => import('./ContactPage'))
-const Footer = dynamic(() => import('./Footer'))
+const ContactPage = dynamic(() => import('@/components/ContactPage'))
+const Footer = dynamic(() => import('@/components/Footer'))
 
 const Layout = () => (
 	<AppContainer>
