@@ -1,23 +1,23 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from 'context'
 import styled from 'styled-components'
+import { LANGUAGES } from '@/helpers/utils'
 
 const LangSwitch = () => {
 	const { language, setLanguage } = useContext(GlobalContext)
+
 	return (
 		<StyledWrapper>
-			{['EN', 'PL'].map((lang, index) => (
-				<>
+			{LANGUAGES.map((lang, index) => (
+				<React.Fragment key={lang.name}>
 					<LangButton
-						key={lang}
-						onClick={() => {
-							setLanguage(lang.toLowerCase())
-						}}
-						active={language === lang.toLowerCase()}>
+						title={lang.name}
+						onClick={() => setLanguage(lang.abbr.toLowerCase())}
+						active={language === lang.abbr.toLowerCase()}>
 						{lang}
 					</LangButton>
 					{index === 0 && <span style={{ margin: 'auto' }}>&nbsp;/&nbsp;</span>}
-				</>
+				</React.Fragment>
 			))}
 		</StyledWrapper>
 	)

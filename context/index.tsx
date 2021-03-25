@@ -1,11 +1,12 @@
 import React, { createContext } from 'react'
 import { ContextType } from '../types'
-import { contentInit, languageInit } from '@/helpers/utils'
+import { languageInit } from '@/helpers/utils'
 import useLanguage from '@/hooks/useLanguage'
+import translationEN from '../translations/en'
 
 const initialContext = {
 	language: languageInit,
-	content: contentInit,
+	content: translationEN,
 	setLanguage: () => {},
 	projects: [],
 }
