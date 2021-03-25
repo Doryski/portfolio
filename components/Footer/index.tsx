@@ -9,7 +9,6 @@ const Footer = () => {
 		<Wrapper>
 			<Content>
 				{content?.footer?.createdBy}
-
 				<GitHubLinks href='https://github.com/Doryski' title='Github'>
 					<span>
 						<DiGithubBadge />

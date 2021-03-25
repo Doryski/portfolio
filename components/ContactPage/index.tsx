@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useRef, useState } from 'react'
+import React, { useContext, useReducer, useRef } from 'react'
 import { GlobalContext } from 'context'
 import SectionName from '../shared/SectionName'
 import { useForm } from 'react-hook-form'
@@ -15,35 +15,11 @@ import useDetectOutsideClick from '../../hooks/useDetectOutsideClick'
 import SubmitFormModal from './SubmitFormModal'
 import { ModalClose, ModalBlur, ModalContent } from './ModalStyled'
 import useDeviceDetect from '@/hooks/useDeviceDetect'
+import { initialSubmit, reducer } from '@/helpers/submitReducer'
 
 export const openModal = (openFn: () => void, messageFn: () => void) => {
 	openFn()
 	messageFn()
-}
-
-type SubmitType = { loading: boolean; success: boolean; failure: boolean }
-type SubmitActionType = {
-	type: 'LOADING' | 'SUCCESS' | 'FAILURE'
-	payload: boolean
-}
-
-const initialSubmit: SubmitType = {
-	loading: false,
-	success: false,
-	failure: false,
-}
-
-const reducer = (state: typeof initialSubmit, action: SubmitActionType) => {
-	switch (action.type) {
-		case 'LOADING':
-			return { ...state, loading: action.payload }
-		case 'SUCCESS':
-			return { ...state, success: action.payload }
-		case 'FAILURE':
-			return { ...state, failure: action.payload }
-		default:
-			throw new Error('Unknown submit action')
-	}
 }
 
 const ContactPage = () => {
