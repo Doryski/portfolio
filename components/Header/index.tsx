@@ -14,6 +14,7 @@ const Header = () => {
 	const menuRef = useRef<HTMLUListElement>(null!)
 	const { isDialogOpen: isNavOpen, toggle, close } = useDialogHandler(false)
 	useHandleMobileMenu([burgerRef, menuRef], close)
+
 	return (
 		<HeaderWrapper>
 			<ClientOnly>
@@ -31,7 +32,7 @@ const Header = () => {
 								</Button>
 							</BurgerWrapper>
 						</NavWrapper>
-						{isNavOpen && <Menu menuRef={menuRef} close={close} />}
+						<Menu isOpen={isNavOpen} menuRef={menuRef} close={close} />
 					</>
 				) : (
 					<NavWrapper>
