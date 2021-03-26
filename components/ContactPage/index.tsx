@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useRef } from 'react'
+import React, { useContext, useEffect, useReducer, useRef } from 'react'
 import { GlobalContext } from 'context'
 import SectionName from '../shared/SectionName'
 import { useForm } from 'react-hook-form'
@@ -26,7 +26,7 @@ const ContactPage = () => {
 	const { isMobile } = useDeviceDetect()
 	const { register, handleSubmit, errors, reset } = useForm()
 	const [submit, dispatch] = useReducer(reducer, initialSubmit)
-	const { isDialogOpen: isModalOpen, open, close } = useDialogHandler(false)
+	const { isOpen, open, close } = useDialogHandler(false)
 	const dialogRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(dialogRef, close)
 
@@ -51,10 +51,12 @@ const ContactPage = () => {
 	const message = <Message {...inputProps} />
 	const submitForm = (
 		<SubmitForm loading={submit.loading}>
-			<SubmitFormModal isModalOpen={isModalOpen}>
+			<SubmitFormModal isOpen={isOpen}>
 				<ModalBlur>
 					<ModalContent ref={dialogRef}>
-						<ModalClose onClick={close} />
+						<div onClick={close}>
+							<ModalClose />
+						</div>
 						<SubmitMessage>
 							{submit.success && content?.contact?.success}
 							{submit.failure && content?.contact?.failure}

@@ -3,19 +3,19 @@ import ReactDom from 'react-dom'
 import ClientOnly from '../shared/ClientOnly'
 
 const SubmitFormModal = ({
-	isModalOpen,
+	isOpen,
 	children,
 }: {
-	isModalOpen: boolean
+	isOpen: boolean
 	children: React.ReactNode
 }) => {
-	if (!isModalOpen) return null
+	if (!isOpen) return null
 
 	return (
 		<ClientOnly>
 			{ReactDom.createPortal(
 				<>{children}</>,
-				document.getElementById('submitForm')!
+				document?.getElementById('submitForm')!
 			)}
 		</ClientOnly>
 	)

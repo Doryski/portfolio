@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import styled from 'styled-components'
 import Menu from './Menu'
 import LangSwitch from './LangSwitch'
@@ -12,13 +12,15 @@ const Header = () => {
 	const { isMobile, isDesktop } = useDeviceDetect()
 	const burgerRef = useRef<HTMLButtonElement>(null!)
 	const menuRef = useRef<HTMLUListElement>(null!)
-	const { isDialogOpen: isNavOpen, toggle, close } = useDialogHandler(false)
+	const { isOpen, toggle, close } = useDialogHandler(false)
 	useHandleMobileMenu([burgerRef, menuRef], close)
+	const isTablet = !isMobile && !isDesktop
+	const menuProps = { isOpen, menuRef, close }
 
 	return (
 		<HeaderWrapper>
 			<ClientOnly>
-				{(!isMobile && !isDesktop) || isMobile ? (
+				{isTablet || isMobile ? (
 					<>
 						<NavWrapper>
 							<BurgerWrapper>
@@ -28,11 +30,11 @@ const Header = () => {
 									type='button'
 									aria-label='Toggle navigation'
 									onClick={toggle}>
-									<MenuIcon isNavOpen={isNavOpen} />
+									<MenuIcon isOpen={isOpen} />
 								</Button>
 							</BurgerWrapper>
 						</NavWrapper>
-						<Menu isOpen={isNavOpen} menuRef={menuRef} close={close} />
+						<Menu {...menuProps} />
 					</>
 				) : (
 					<NavWrapper>
@@ -80,7 +82,7 @@ export const BurgerWrapper = styled.div`
 	}
 `
 export const MenuIcon = styled(
-	({ isNavOpen, ...props }: { isNavOpen: boolean }) =>
+	({ isOpen: isNavOpen, ...props }: { isOpen: boolean }) =>
 		isNavOpen ? <MdClose {...props} /> : <MdMenu {...props} />
 )`
 	width: 1.8rem;

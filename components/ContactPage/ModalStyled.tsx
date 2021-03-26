@@ -17,13 +17,17 @@ export const ModalContent = styled.section`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: white;
+	background-color: ${({ theme }) => theme.colors.light};
 	min-width: 300px;
 	min-height: 200px;
-	width: 50%;
+	width: 80%;
 	height: 50%;
 	border-radius: 25px;
 	position: relative;
+	text-align: center;
+	@media only screen and (min-width: 900px) {
+		width: 40%;
+	}
 `
 export const ModalClose = styled(MdClose)`
 	position: absolute;
@@ -32,4 +36,11 @@ export const ModalClose = styled(MdClose)`
 	width: 2.5em;
 	height: 2.5em;
 	cursor: pointer;
+	color: ${({ theme }) => theme.colors.dark};
+	transition: all 0.3s ease-out;
+	transform: unset;
+	&:hover {
+		color: ${({ theme }) => theme.colors.primary};
+		transform: rotate(90deg);
+	}
 `
