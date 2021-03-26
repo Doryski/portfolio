@@ -8,13 +8,13 @@ const LangSwitch = () => {
 
 	return (
 		<StyledWrapper>
-			{LANGUAGES.map((lang, index) => (
-				<React.Fragment key={lang.name}>
+			{LANGUAGES.map(({ abbr, name }, index) => (
+				<React.Fragment key={name}>
 					<LangButton
-						title={lang.name}
-						onClick={() => setLanguage(lang.abbr.toLowerCase())}
-						active={language === lang.abbr.toLowerCase()}>
-						{lang}
+						title={name}
+						onClick={() => setLanguage(abbr.toLowerCase())}
+						active={language === abbr.toLowerCase()}>
+						{abbr}
 					</LangButton>
 					{index === 0 && <span style={{ margin: 'auto' }}>&nbsp;/&nbsp;</span>}
 				</React.Fragment>
