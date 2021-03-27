@@ -2,11 +2,11 @@ import { useRef } from 'react'
 import styled from 'styled-components'
 import Menu from './Menu'
 import LangSwitch from './LangSwitch'
-import { MdMenu, MdClose } from 'react-icons/md'
 import useDialogHandler from '../../hooks/useDialogHandler'
 import useHandleMobileMenu from '../../hooks/useHandleMobileMenu'
 import useDeviceDetect from '@/hooks/useDeviceDetect'
 import ClientOnly from '../shared/ClientOnly'
+import Burger from '../shared/Burger'
 
 const Header = () => {
 	const { isMobile, isDesktop } = useDeviceDetect()
@@ -30,7 +30,7 @@ const Header = () => {
 									type='button'
 									aria-label='Toggle navigation'
 									onClick={toggle}>
-									<MenuIcon isOpen={isOpen} />
+									<Burger isOpen={isOpen} />
 								</Button>
 							</BurgerWrapper>
 						</NavWrapper>
@@ -80,13 +80,6 @@ export const BurgerWrapper = styled.div`
 	@media only screen and (min-width: 900px) {
 		display: none;
 	}
-`
-export const MenuIcon = styled(
-	({ isOpen: isNavOpen, ...props }: { isOpen: boolean }) =>
-		isNavOpen ? <MdClose {...props} /> : <MdMenu {...props} />
-)`
-	width: 1.8rem;
-	height: 1.8rem;
 `
 
 export default Header

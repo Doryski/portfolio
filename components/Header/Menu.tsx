@@ -109,7 +109,6 @@ export const LinkContent = styled.span`
 	width: 100%;
 	max-width: 110px;
 	font-weight: 600;
-	transition: color 0.4s;
 	span {
 		margin-left: 0.5em;
 	}
