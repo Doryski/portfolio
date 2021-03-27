@@ -8,7 +8,7 @@ const LangSwitch = () => {
 
 	return (
 		<StyledWrapper>
-			{LANGUAGES.map(({ abbr, name }, index) => (
+			{LANGUAGES.map(({ abbr, name }, index, arr) => (
 				<React.Fragment key={name}>
 					<LangButton
 						title={name}
@@ -16,14 +16,16 @@ const LangSwitch = () => {
 						active={language === abbr.toLowerCase()}>
 						{abbr}
 					</LangButton>
-					{index === 0 && <span style={{ margin: 'auto' }}>&nbsp;/&nbsp;</span>}
+					{index !== arr.length - 1 && (
+						<span style={{ margin: 'auto' }}>&nbsp;/&nbsp;</span>
+					)}
 				</React.Fragment>
 			))}
 		</StyledWrapper>
 	)
 }
 export const StyledWrapper = styled.div`
-	padding: 0 0 0 ${({ theme }) => theme.padding.medium};
+	padding-left: ${({ theme }) => theme.padding.medium};
 	display: flex;
 	@media only screen and (max-width: 900px) {
 		padding: 0 ${({ theme }) => theme.padding.medium};
@@ -32,7 +34,7 @@ export const StyledWrapper = styled.div`
 export const LangButton = styled.button<{ active: boolean }>`
 	color: ${({ active, theme }) => (active ? theme.colors.primary : 'inherit')};
 	font-weight: bold;
-	background: transparent;
+	background-color: transparent;
 	border: none;
 	font-size: ${({ active }) => (active ? '.9rem' : '.875rem')};
 	transition: all 0.4s ease;

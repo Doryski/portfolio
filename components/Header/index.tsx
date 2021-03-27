@@ -3,17 +3,17 @@ import styled from 'styled-components'
 import Menu from './Menu'
 import LangSwitch from './LangSwitch'
 import useDialogHandler from '../../hooks/useDialogHandler'
-import useHandleMobileMenu from '../../hooks/useHandleMobileMenu'
 import useDeviceDetect from '@/hooks/useDeviceDetect'
 import ClientOnly from '../shared/ClientOnly'
 import Burger from '../shared/Burger'
+import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
 
 const Header = () => {
 	const { isMobile, isDesktop } = useDeviceDetect()
 	const burgerRef = useRef<HTMLButtonElement>(null!)
 	const menuRef = useRef<HTMLUListElement>(null!)
 	const { isOpen, toggle, close } = useDialogHandler(false)
-	useHandleMobileMenu([burgerRef, menuRef], close)
+	useDetectOutsideClick([burgerRef, menuRef], close)
 	const isTablet = !isMobile && !isDesktop
 	const menuProps = { isOpen, menuRef, close }
 	const burgerProps = { isOpen, burgerRef, toggle }
