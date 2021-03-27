@@ -137,7 +137,6 @@ export const LinkContent = styled.span`
 				transform-origin: right;
 				transition: transform 0.4s ease-out;
 				top: 21px;
-				bottom: -2px;
 			}
 			&::after {
 				content: '';
