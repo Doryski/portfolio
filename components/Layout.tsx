@@ -1,9 +1,9 @@
-import HomePage from '@/components/HomePage'
+import Home from '@/components/Home'
 import Header from '@/components/Header'
 import styled from 'styled-components'
-import PortfolioPage from '@/components/PortfolioPage'
+import Portfolio from '@/components/Portfolio'
 import dynamic from 'next/dynamic'
-const ContactPage = dynamic(() => import('@/components/ContactPage'))
+const Contact = dynamic(() => import('@/components/Contact'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
 const Layout = () => (
@@ -12,11 +12,11 @@ const Layout = () => (
 			<BackgroundImg>
 				<BackgroundBlur>
 					<Header />
-					<HomePage />
+					<Home />
 				</BackgroundBlur>
 			</BackgroundImg>
-			<PortfolioPage />
-			<ContactPage />
+			<Portfolio />
+			<Contact />
 			<Footer />
 		</ContentContainer>
 	</AppContainer>
