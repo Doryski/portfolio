@@ -1,21 +1,16 @@
 import styled from 'styled-components'
 
-const Burger = ({ isOpen }: { isOpen: boolean }) => {
-	return (
-		<IconWrapper isOpen={isOpen}>
-			{Array(3)
-				.fill(1)
-				.map((el, id) => {
-					return <Line isOpen={isOpen} />
-				})}
-		</IconWrapper>
-	)
-}
+const Burger = ({ isOpen }: { isOpen: boolean }) => (
+	<IconWrapper isOpen={isOpen}>
+		{[...Array(3)].map(() => (
+			<Line isOpen={isOpen} />
+		))}
+	</IconWrapper>
+)
 
 export const IconWrapper = styled.div<{ isOpen: boolean }>`
 	width: 1.5rem;
 	height: 1.2rem;
-	/* background-color: white; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -28,7 +23,7 @@ export const Line = styled.i<{ isOpen: boolean }>`
 	transform: unset;
 	background-color: ${({ theme, isOpen }) =>
 		isOpen ? theme.colors.primary : theme.colors.dark};
-	transition: all 0.4s;
+	transition: all 0.4s cubic-bezier(1, 0, 0, 1);
 	transform-origin: left;
 	&:nth-of-type(2) {
 		width: 60%;
