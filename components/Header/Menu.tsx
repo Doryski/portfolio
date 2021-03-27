@@ -39,7 +39,7 @@ const Menu = ({
 						<Link href={link.href} onClick={close}>
 							<LinkContent>
 								{((!isDesktop && !isMobile) || isMobile) && link.icon}
-								<span style={{ marginLeft: '.5em' }}>{link.title}</span>
+								<span>{link.title}</span>
 							</LinkContent>
 						</Link>
 					</ListItem>
@@ -110,9 +110,15 @@ export const LinkContent = styled.span`
 	max-width: 110px;
 	font-weight: 600;
 	transition: color 0.4s;
+	span {
+		margin-left: 0.5em;
+	}
 	@media only screen and (min-width: 900px) {
 		max-width: 150px;
 		padding: 0 ${({ theme }) => theme.padding.xxl};
+		span {
+			margin: 0;
+		}
 
 		span:hover::before {
 			transform: scaleX(1);
@@ -130,7 +136,8 @@ export const LinkContent = styled.span`
 				transform: scaleX(0);
 				transform-origin: right;
 				transition: transform 0.4s ease-out;
-				top: 20px;
+				top: 21px;
+				bottom: -2px;
 			}
 			&::after {
 				content: '';
