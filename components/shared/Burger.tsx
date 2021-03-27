@@ -1,13 +1,32 @@
 import styled from 'styled-components'
 
-const Burger = ({ isOpen }: { isOpen: boolean }) => (
-	<IconWrapper isOpen={isOpen}>
-		{[...Array(3)].map(() => (
-			<Line isOpen={isOpen} />
-		))}
-	</IconWrapper>
+const Burger = ({
+	isOpen,
+	toggle,
+	burgerRef,
+}: {
+	isOpen: boolean
+	toggle: () => void
+	burgerRef: React.RefObject<HTMLButtonElement>
+}) => (
+	<Button
+		ref={burgerRef}
+		type='button'
+		aria-label='Toggle navigation'
+		onClick={toggle}>
+		<IconWrapper isOpen={isOpen}>
+			{[...Array(3)].map(() => (
+				<Line isOpen={isOpen} />
+			))}
+		</IconWrapper>
+	</Button>
 )
 
+export const Button = styled.button`
+	border: none;
+	background: transparent;
+	display: flex;
+`
 export const IconWrapper = styled.div<{ isOpen: boolean }>`
 	width: 1.5rem;
 	height: 1.2rem;

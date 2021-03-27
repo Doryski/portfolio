@@ -16,6 +16,7 @@ const Header = () => {
 	useHandleMobileMenu([burgerRef, menuRef], close)
 	const isTablet = !isMobile && !isDesktop
 	const menuProps = { isOpen, menuRef, close }
+	const burgerProps = { isOpen, burgerRef, toggle }
 
 	return (
 		<HeaderWrapper>
@@ -25,13 +26,7 @@ const Header = () => {
 						<NavWrapper>
 							<BurgerWrapper>
 								<LangSwitch />
-								<Button
-									ref={burgerRef}
-									type='button'
-									aria-label='Toggle navigation'
-									onClick={toggle}>
-									<Burger isOpen={isOpen} />
-								</Button>
+								<Burger {...burgerProps} />
 							</BurgerWrapper>
 						</NavWrapper>
 						<Menu {...menuProps} />
@@ -70,11 +65,7 @@ export const MenuWrapper = styled.section`
 	align-items: center;
 	height: 100%;
 `
-export const Button = styled.button`
-	border: none;
-	background: transparent;
-	display: flex;
-`
+
 export const BurgerWrapper = styled.div`
 	display: flex;
 	@media only screen and (min-width: 900px) {
