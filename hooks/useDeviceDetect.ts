@@ -32,5 +32,5 @@ export default function useDeviceDetect(
 			window.removeEventListener('resize', resizeListener.current)
 		}
 	})
-	return { isMobile, isDesktop }
+	return { isMobile, isDesktop, isTablet: !isMobile && !isDesktop }
 }

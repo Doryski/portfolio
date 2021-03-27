@@ -1,27 +1,27 @@
-import { useRef } from 'react'
 import styled from 'styled-components'
 import Menu from './Menu'
 import LangSwitch from './LangSwitch'
-import useDialogHandler from '../../hooks/useDialogHandler'
-import useDeviceDetect from '@/hooks/useDeviceDetect'
 import ClientOnly from '../shared/ClientOnly'
 import Burger from '../shared/Burger'
+import { useRef } from 'react'
+import useDeviceDetect from '@/hooks/useDeviceDetect'
+import useDialogHandler from '@/hooks/useDialogHandler'
 import useDetectOutsideClick from '@/hooks/useDetectOutsideClick'
 
 const Header = () => {
-	const { isMobile, isDesktop } = useDeviceDetect()
+	const { isDesktop } = useDeviceDetect()
 	const burgerRef = useRef<HTMLButtonElement>(null!)
 	const menuRef = useRef<HTMLUListElement>(null!)
 	const { isOpen, toggle, close } = useDialogHandler(false)
 	useDetectOutsideClick([burgerRef, menuRef], close)
-	const isTablet = !isMobile && !isDesktop
+
 	const menuProps = { isOpen, menuRef, close }
 	const burgerProps = { isOpen, burgerRef, toggle }
 
 	return (
 		<HeaderWrapper>
 			<ClientOnly>
-				{isTablet || isMobile ? (
+				{!isDesktop ? (
 					<>
 						<NavWrapper>
 							<BurgerWrapper>
@@ -44,17 +44,17 @@ const Header = () => {
 	)
 }
 export const HeaderWrapper = styled.header`
-	height: ${({ theme }) => theme.header};
-	width: 100%;
 	max-width: 1400px;
+	width: 100%;
+	height: ${({ theme }) => theme.header};
 	z-index: 5;
 `
 export const NavWrapper = styled.nav`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	height: 100%;
 	width: 90%;
+	height: 100%;
 	margin: 0 auto;
 	@media only screen and (min-width: 400px) {
 		width: 80%;

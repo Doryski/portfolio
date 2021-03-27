@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { GlobalContext } from 'context'
 import styled from 'styled-components'
+import { GlobalContext } from 'context'
 import { LANGUAGES } from '@/helpers/utils'
 
 const LangSwitch = () => {
@@ -25,18 +25,18 @@ const LangSwitch = () => {
 	)
 }
 export const StyledWrapper = styled.div`
-	padding-left: ${({ theme }) => theme.padding.medium};
 	display: flex;
+	padding-left: ${({ theme }) => theme.padding.medium};
 	@media only screen and (max-width: 900px) {
 		padding: 0 ${({ theme }) => theme.padding.medium};
 	}
 `
 export const LangButton = styled.button<{ active: boolean }>`
-	color: ${({ active, theme }) => (active ? theme.colors.primary : 'inherit')};
-	font-weight: bold;
 	background-color: transparent;
 	border: none;
-	font-size: ${({ active }) => (active ? '.9rem' : '.875rem')};
+	font-weight: bold;
 	transition: all 0.4s ease;
+	color: ${({ active, theme }) => (active ? theme.colors.primary : 'inherit')};
+	font-size: ${({ active }) => (active ? '.9rem' : '.875rem')};
 `
 export default LangSwitch
