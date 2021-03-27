@@ -113,8 +113,30 @@ export const LinkContent = styled.span`
 	@media only screen and (min-width: 900px) {
 		max-width: 150px;
 		padding: 0 ${({ theme }) => theme.padding.xxl};
-		&:hover {
-			color: ${({ theme }) => theme.colors.primary};
+
+		span:hover::before {
+			transform: scaleX(1);
+			transform-origin: left;
+		}
+		span {
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				background: ${({ theme }) => theme.colors.primary};
+				transform: scaleX(0);
+				transform-origin: right;
+				transition: transform 0.4s ease-out;
+				top: 20px;
+			}
+			&::after {
+				content: '';
+				visibility: hidden;
+				opacity: 0;
+			}
 		}
 	}
 `
