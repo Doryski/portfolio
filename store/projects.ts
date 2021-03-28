@@ -41,7 +41,7 @@ export default [
 			name: 'Notatnik',
 		},
 		tools: 'React, Styled-components, React Router',
-		imgSrc: '/images/notebook_react_app.png',
+		imgSrc: '/images/notebook_react_app.gif',
 		demoUrl: 'https://doryski.github.io/notebook-react-app/',
 		codeUrl: 'https://github.com/Doryski/notebook-react-app',
 		colors: {
