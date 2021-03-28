@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
 						dangerouslySetInnerHTML={{
 							__html: `
 								window.dataLayer = window.dataLayer || [];
-								function gtag() {window.dataLayer.push(arguments)}
+								function gtag() {dataLayer.push(arguments);}
 								gtag("js", new Date());
 								gtag("config", "UA-162478780-1");`,
 						}}
