@@ -11,8 +11,7 @@ export default class MyDocument extends Document {
 			context.renderPage = () =>
 				originalRenderPage({
 					// @ts-ignore
-					enhanceApp: (App) => (props) =>
-						sheet.collectStyles(<App {...props} />),
+					enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
 				})
 
 			const initialProps = await Document.getInitialProps(context)
@@ -32,7 +31,21 @@ export default class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
-				<Head />
+				<Head>
+					{/* Global site tag (gtag.js) - Google Analytics */}
+					<script
+						async
+						src='https://www.googletagmanager.com/gtag/js?id=UA-162478780-1'></script>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `
+								window.dataLayer = window.dataLayer || [];
+								function gtag() {window.dataLayer.push(arguments)}
+								gtag("js", new Date());
+								gtag("config", "UA-162478780-1");`,
+						}}
+					/>
+				</Head>
 				<body>
 					<Main />
 					<div id='submitForm' />
