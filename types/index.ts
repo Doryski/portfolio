@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction } from 'react'
 export type InputProps = {
 	errors: DeepMap<Record<string, any>, FieldError>
 	register: Function
+	required: boolean
 }
 
 export type Project = typeof projects[0]

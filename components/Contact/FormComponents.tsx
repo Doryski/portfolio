@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Button } from '../shared/Button'
 
 export const Form = styled.form`
@@ -62,8 +62,22 @@ export const EmailLabel = styled(Label)`
 	}
 `
 
-export const LabelText = styled.span`
+export const LabelText = styled.span<{ required: boolean }>`
 	margin-left: 0.5em;
+	position: relative;
+	${({ required }) =>
+		required &&
+		css`
+			&::after {
+				content: '*';
+				color: rgb(207, 0, 0);
+				position: absolute;
+				font-size: 0.875rem;
+				top: 0;
+				right: -8px;
+			}
+		`}
+
 	@media only screen and (max-width: 900px) {
 		margin: auto auto auto 0.5em;
 	}

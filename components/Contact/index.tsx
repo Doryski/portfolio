@@ -30,7 +30,7 @@ const ContactPage = () => {
 	const dialogRef = useRef<HTMLDivElement>(null!)
 	useDetectOutsideClick(dialogRef, close)
 
-	const onSubmit = handleSubmit(async (data) => {
+	const onSubmit = handleSubmit(async data => {
 		dispatch({ type: 'LOADING', payload: true })
 		await postMessage(
 			'https://formspree.io/xvorpadg',
@@ -45,7 +45,7 @@ const ContactPage = () => {
 		dispatch({ type: 'LOADING', payload: false })
 	})
 
-	const inputProps = { errors, register }
+	const inputProps = { errors, register, required: true }
 	const name = <Name {...inputProps} />
 	const email = <Email {...inputProps} />
 	const message = <Message {...inputProps} />

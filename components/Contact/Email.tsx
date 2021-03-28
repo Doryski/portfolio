@@ -5,20 +5,20 @@ import { EMAIL_REGEX } from '../../helpers/utils'
 import { InputProps } from '../../types'
 import { MdEmail } from 'react-icons/md'
 
-const Email = ({ errors, register }: InputProps) => {
+const Email = ({ errors, register, required }: InputProps) => {
 	const { content } = useContext(GlobalContext)
 	const NAME = 'email'
 	return (
 		<Row>
 			<EmailLabel htmlFor={NAME}>
 				<MdEmail />
-				<LabelText>{content?.contact?.email}</LabelText>
+				<LabelText required={required}>{content?.contact?.email}</LabelText>
 			</EmailLabel>
 			<EmailInput
 				name={NAME}
 				placeholder='example@address.com'
 				ref={register({
-					required: true,
+					required,
 					pattern: EMAIL_REGEX,
 				})}
 			/>
